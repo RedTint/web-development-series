@@ -1,0 +1,14 @@
+#footer {
+    background-color: #248fc9;
+    color: #fff;
+    padding: 24px;
+}
+
+#footer a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}

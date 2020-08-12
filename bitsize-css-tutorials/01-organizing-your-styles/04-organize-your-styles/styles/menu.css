@@ -1,0 +1,20 @@
+#menu {
+    background-color: #53585f;
+}
+
+#menu a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 16px 10px 16px;
+    background-color: #353535;
+    color: #fff;
+    margin: 0;
+}
+
+#menu a:hover {
+    background-color: #696969;
+}
+
+#menu a.active {
+    background-color: #a9a9a9;
+}

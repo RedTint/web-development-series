@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1>Internal CSS - Good Example</h1>
+        <p>
+            This is a paragraph styled using Internal CSS <br/>
+            using some awesome Javascript'ing techniques
+        </p>
+        <div id="links">
+            <a href="01-inline-css.html">Home</a>
+            <a class="active" href="02-inline-css-good-example.html">Good Example</a>
+        </div>
+
+        <div id="form">
+            Input Color to Change to: <input type="text" id="color" />
+            <button onclick="changeColor()">Change Color</button>
+        </div>
+
+        <script>
+            function changeColor() {
+                const color = document.getElementById('color').value;
+
+                const h1 = document.getElementsByTagName('h1');
+                h1[0].style= `color: ${color}`;
+
+                const p = document.getElementsByTagName('p');
+                p[0].style= `color: ${color}`;
+            }
+        </script>
+    </body>
+</html>
