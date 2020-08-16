@@ -446,6 +446,12 @@ const displayMap = async () => {
         .attr('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`)
         .style('overflow', 'auto')
 
+
+    // ADD TOOLTIP
+    svg.append('div')
+        .attr('id', 'tooltip')
+        .classed('hidden', true)
+
     // DEFINE GROUP CONTAINERS
     const country = svg
         .append('g')
@@ -516,12 +522,14 @@ const displayMap = async () => {
 }
 
 const displayCovidData = (covidSummary) => {
-    const data = document.getElementById('data')
+    const data = document.getElementById('distribution')
     const lis = covidSummary.map(summary => {
+        let municityPSGC = summary.covidSummary.municityPSGC
+        municityPSGC = municityPSGC ? municityPSGC : 'Unidentified'
         return `<li data-psgc="${summary.municityPSGC}">
-            <span class="psgc">${summary.covidSummary.municityPSGC}</span>
-            <span class="municity">${summary.covidSummary.municity}</span>
+            <span class="psgc">${municityPSGC}</span>
             <span class="covid-count">${summary.covidSummary.covidCasesCount}</span>
+            <span class="municity">${summary.covidSummary.municity}</span>
         </li>`
     })
 
@@ -533,22 +541,52 @@ const displayCovidData = (covidSummary) => {
     `
 }
 
+const displayTooltip = (feature, regionName, provinceName, municityName, municityPSGC, cases) => {
+    const tooltip = d3.select('#tooltip')
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY - 28) + "px");
+
+    if (!feature) {
+        tooltip.classed('hidden', true)
+        return
+    }
+
+    const innerHtml = `
+        <div class="covid-cases">${cases}</div>
+        <div>PSGC: ${municityPSGC}</div>
+        <div>Municipality / City: ${municityName}</div>
+        <div>Province: ${provinceName}</div>
+        <div>Region: ${regionName}</div>
+    `
+
+
+    tooltip.html(innerHtml)
+        .classed('hidden', false)
+}
+
 const updateDetails = (feature, covidSummary) => {
+    let caseCount = 0
     const region = document.getElementById('region')
     const province = document.getElementById('province')
     const municity = document.getElementById('municity')
     const cases = document.getElementById('cases')
 
-    region.textContent = feature.properties[REGION_KEY]
-    province.textContent = feature.properties[PROVINCE_KEY]
-    municity.textContent = feature.properties[MUNICITY_KEY]
-
+    const regionName = feature.properties[REGION_KEY]
+    const provinceName = feature.properties[PROVINCE_KEY]
+    const municityName = feature.properties[MUNICITY_KEY]
     const municityPSGC = feature.properties[COVID_MAPPING_KEY]
+
+    region.textContent = regionName
+    province.textContent = provinceName
+    municity.textContent = municityName
+
     const summary = covidSummary.find(summary => summary.municityPSGC == municityPSGC)
     if (summary) {
-        cases.textContent = summary.covidSummary.covidCasesCount
+        caseCount = summary.covidSummary.covidCasesCount
+        cases.textContent = caseCount
     }
 
+    displayTooltip(feature, regionName, provinceName, municityName, municityPSGC, caseCount)
 }
 
 displayMap()

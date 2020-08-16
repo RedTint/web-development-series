@@ -6,8 +6,12 @@
         <script src="https://unpkg.com/topojson@3"></script>
         <script type="text/javascript" src="http://localhost:4000/scripts"></script>
         <style>
+            svg {
+                position: relative;
+            }
+
             .municity:hover {
-                fill : #292929;
+                fill : #c9c9c9;
                 cursor: pointer;
             }
 
@@ -21,6 +25,55 @@
                 height: 800px;
                 overflow-y: scroll;
             }
+
+            #data ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            #data li {
+                list-style-type: none;
+            }
+
+            #data li:nth-child(odd) .psgc {
+                background-color: #f1f1f1;
+            }
+
+            #data li:nth-child(even) .psgc {
+                background-color: #fff;
+            }
+
+            #data span {
+                display: inline-block;
+                padding: 5px;
+            }
+
+            #data .psgc {
+                width: 110px;
+            }
+
+            #data .covid-count {
+                width: 80px;
+            }
+
+            #data .municity {
+                text-transform: capitalize;
+            }
+
+            #data .header {
+                font-weight: bold;
+            }
+
+            #d3-ph-map #tooltip {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            #d3-ph-map #tooltip.hidden {
+                opacity: 0;
+            }
+
         </style>
     </head>
     <body>
@@ -33,7 +86,11 @@
         </div>
         <div id="content">
             <div id="d3-ph-map"></div>
-            <div id="data"></div>
+            <div id="data">
+                <h3>Covid-19 Map Distribution</h3>
+                <div class="header"><span class="psgc">PSGC</span><span>Covid Case Count</span><span>City / Municipality</span></div>
+                <div id="distribution"></div>
+            </div>
         </div>
     </body>
 </html>
