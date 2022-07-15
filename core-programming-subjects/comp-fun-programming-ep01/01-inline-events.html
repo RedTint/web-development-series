@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>DOM Event</title>
+    </head>
+    <body>
+        <button id="btn-example">Click Me</button>
+        <p id="paragraph">This is an awesome paragraph with awesome skillset</p>
+
+        <script>
+            document.getElementById('btn-example').onclick = function() {
+                alert('Hello, world from inside a function');
+            }
+
+            document.getElementById('paragraph').onmouseover = function() {
+                alert('Mouse over');
+            }
+        </script>
+    </body>
+</html>

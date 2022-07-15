@@ -1,0 +1,33 @@
+#player-1,
+#player-2 {
+    width: 50px;
+    position: absolute;
+    left: 50px;
+    top: 100px;
+    transition-duration: 1s;
+}
+
+#player-1 img,
+#player-2 img {
+    width: 100%;
+}
+
+#player-2 {
+    top: 250px;
+}
+
+#starting-line {
+    width: 12px;
+    background-color: grey;
+    height: 1000px;
+    position: absolute;
+    left: 120px;
+}
+
+#finish-line {
+    width: 25px;
+    background-color: green;
+    height: 1000px;
+    position: absolute;
+    left: 1200px;
+}

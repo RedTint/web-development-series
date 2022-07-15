@@ -500,7 +500,10 @@ const displayMap = async () => {
             return choroplethScale(0)
         })
         .on('mouseover', function(feature) {
+            console.log(feature);
             updateDetails(feature, covidSummary)
+
+            document.querySelector(`li[data-psgc="${feature.properties['ADM3_PCODE']}"]`).style.backgroundColor='black';
         })
 
     // ZOOM HANDLER
